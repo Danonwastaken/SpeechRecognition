@@ -16,6 +16,7 @@ def record(): #Запись голоса и перевод в текст
         print("Прослушивание завершено!") 
         try:
             recognized_data = recog.recognize_google(audio, language="ru").lower() 
+            print("Вы сказали: " + recognized_data)
         except sr.UnknownValueError: #Если команда не разобрана
             print("Команда не распознана") 
         return recognized_data
