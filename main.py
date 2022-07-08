@@ -12,10 +12,10 @@ def record(): #Запись голоса и перевод в текст
     mic = sr.Microphone()
     with mic:
         recognized_data = ""
-        audio = recog.listen(mic, 5, 5) 
+        audio = recog.listen(mic, 5, 5)
+        print("Прослушивание завершено!") 
         try:
             recognized_data = recog.recognize_google(audio, language="ru").lower() 
-            print(recognized_data)
         except sr.UnknownValueError: #Если команда не разобрана
             print("Команда не распознана") 
         return recognized_data
