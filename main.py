@@ -6,27 +6,27 @@ from Audio.sound import Sound
 from urllib.parse import quote_plus
 
 recog = sr.Recognizer()
-print("Здравствуйте! Я вас слушаю") # Приветствие 
+print("Здравствуйте! Я вас слушаю") #Приветствие 
 
 def record(): #Запись голоса и перевод в текст
     mic = sr.Microphone()
     with mic:
         recognized_data = ""
-        audio = recog.listen(mic, 5, 5)
-        print("Прослушивание завершено!") 
+        audio = recog.listen(mic, 5, 5) 
+        print("Прослушивание завершено!")
         try:
             recognized_data = recog.recognize_google(audio, language="ru").lower() 
-            print("Вы сказали: " + recognized_data)
-        except sr.UnknownValueError: #Если команда не разобрана
-            print("Команда не распознана") 
+            print("Ваша команда: " + recognized_data) #Вывод сказанного
+        except sr.UnknownValueError: #Если команда не распознана
+            print("Команда не распознана или таковой не существует") 
         return recognized_data
 
-def command(words):
+def command(words): #Поиск нужной команды
         for x in words:
             if x in recognized_data:
                 return True
 
-def commands(recognized_data): #Функция, отвечающая за выполнение команд
+def commands(recognized_data): #Выполнение команд
     #З1 - Открытие диспетчера задач:
     if command(["открой диспетчер задач"]):
         print("Открываю...")
@@ -39,7 +39,7 @@ def commands(recognized_data): #Функция, отвечающая за вып
 
     #З3 - Поиск в интернете:
     if command(["поиск в интернете"]):
-        call = recognized_data.split(" ",3)[3]  #Удаление первых трёх слов
+        call = recognized_data.split(" ",3)[3]
         wb.open_new_tab("https://yandex.ru/search/?text=" + quote_plus(call) + "&clid=2100784-306&banerid=6302000000%3A5e0887dc35a2d000254ec9d6&win=417&lr=37143")
         print("Смотрите, что я вам смогла найти!")
 
@@ -55,8 +55,8 @@ def commands(recognized_data): #Функция, отвечающая за вып
 
     #З6 - Установка громкости на N: 
     if command(["поставь громкость", "установи громкость"]):
-        vol = int(recognized_data.split(" ",2)[2]) #Удаление первых двух слов
-        Sound.volume_set(vol)
+        Sound.volume_set(int(recognized_data.split(" ",2)[2])) #Удаление первых двух слов
+        print("Громкость была успешно изменена!")
 
     #З7 - Умножение двух чисел
     if command(["x"]):
@@ -64,9 +64,7 @@ def commands(recognized_data): #Функция, отвечающая за вып
         if znak == "x": 
             print(int(recognized_data.split()[0]) * int(recognized_data.split()[2])) # Умножение первого и второго числа
         else:
-            print("Не правильно назван знак!")
-    else:
-        print("Команда не найдена!")
+            print("Повторите команду снова")
 
 # "Бесконечно" работающая программа
 while True:
