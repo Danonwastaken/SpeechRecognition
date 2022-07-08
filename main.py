@@ -22,8 +22,8 @@ def record(): #Запись голоса и перевод в текст
             print("Команда не распознана") 
         return recognized_data
 
-def command(terms):  #Создание команды
-        for x in terms:
+def command(words):  #Создание команды
+        for x in words:
             if x in recognized_data:
                 return True
 
