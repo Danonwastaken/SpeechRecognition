@@ -27,7 +27,7 @@ def command(terms):  #Создание команды
             if x in recognized_data:
                 return True
 
-def commands(recognized_data): #Функция, отвечающая за команды
+def commands(recognized_data): #Функция, отвечающая за выполнение команд
     #З1 - Открытие диспетчера задач:
     if command(["открой диспетчер задач"]):
         print("Открываю...")
