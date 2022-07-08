@@ -40,7 +40,7 @@ def commands(recognized_data): #Функция, отвечающая за вып
 
     #З3 - Поиск в интернете:
     if command(["поиск в интернете"]):
-        call = recognized_data.split(" ",3)[3]
+        call = recognized_data.split(" ",3)[3]  #Удаление первых трёх слов
         wb.open_new_tab("https://yandex.ru/search/?text=" + quote_plus(call) + "&clid=2100784-306&banerid=6302000000%3A5e0887dc35a2d000254ec9d6&win=417&lr=37143")
         print("Смотрите, что я вам смогла найти!")
 
